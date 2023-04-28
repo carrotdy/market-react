@@ -1,10 +1,12 @@
 import React from 'react';
+import logo from '../../images/logo.png'
+import { Col } from 'antd';
 
 const SignUp = () => {
     return (
-        <div>
-            안녕~~~
-        </div>
+        <Col className='sign-up-container'>
+            <img src={logo}/>
+        </Col>
     );
 };
 
