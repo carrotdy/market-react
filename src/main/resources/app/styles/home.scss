@@ -1,9 +1,20 @@
 @import "./color.scss";
 
-.sign-up-container {
+.ant-layout-content {
    
     img {
         height: 100px;
         width: 420px;
+    }
+    
+    .sign-up-submit-button {
+        border: 1px solid $orange;
+        border-radius: 4px;
+        text-align: center;
+        color: $gray-10;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-bottom: 50px;
+        background-color: $orange;
     }
 }
