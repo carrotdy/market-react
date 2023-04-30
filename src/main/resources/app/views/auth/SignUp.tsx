@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../images/logo.png';
 import { Col, Row, Form, Input } from 'antd';
 import { Layout } from '../../layouts/Layout';
-import { useForm } from 'react-hook-form';
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [form] = Form.useForm();
+    const reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;  //6~20 영문 대소문자 중에 최소 1개의 숫자 혹은 특수 문자를 포함
+    const [password, setPassword] = useState<string>('');
+    const [rePassword, setRePassword] = useState<string>('');
 
     return (
         <Layout>
@@ -36,19 +38,22 @@ const SignUp = () => {
                         </Form.Item>
                         <Form.Item
                             label={'비밀번호'}
-                            name={'userPassword'}
+                            name={'password'}
                             rules={[
                                 {
                                     required: true,
-                                    message: "비밀번호를 입력해 주세요.",
+                                    message: "특수 문자를 포함히야 6자리 이상",
                                 },
                             ]}
                         >
-                            <Input type='userPassword' placeholder="비밀번호를 입력해 주세요." />
+                            <Input
+                                type='password'
+                                onChange={(e) => { setPassword(e.target.value) }}
+                                placeholder="비밀번호를 입력해 주세요." />
                         </Form.Item>
                         <Form.Item
                             label={'비밀번호 재확인'}
-                            name={'userRePassword'}
+                            name={'rePassword'}
                             rules={[
                                 {
                                     required: true,
@@ -56,11 +61,22 @@ const SignUp = () => {
                                 },
                             ]}
                         >
-                            <Input type='userRePassword' placeholder="비밀번호를 입력해주세요." />
+                            <Input
+                                type='rePassword'
+                                onChange={(e) => { setRePassword(e.target.value) }}
+                                placeholder="비밀번호를 입력해주세요." />
+                            {rePassword != '' &&
+                                <>
+                                    {rePassword == password ?
+                                        <div style={{ color: 'blue', fontSize: 12, marginTop: 5 }}>확인되었습니다.</div>
+                                        : <div style={{ color: 'red', fontSize: 12, marginTop: 5 }}>비밀번호를 다시 입력해주세요.</div>
+                                    }
+                                </>
+                            }
                         </Form.Item>
                         <Form.Item
                             label={'이름'}
-                            name={'userName'}
+                            name={'name'}
                             rules={[
                                 {
                                     required: true,
@@ -68,11 +84,11 @@ const SignUp = () => {
                                 },
                             ]}
                         >
-                            <Input type='userName' placeholder="이름을 입력해 주세요." />
+                            <Input type='name' placeholder="이름을 입력해 주세요." />
                         </Form.Item>
                         <Form.Item
                             label={'이메일'}
-                            name={'userEmail'}
+                            name={'email'}
                             rules={[
                                 {
                                     required: true,
@@ -80,7 +96,7 @@ const SignUp = () => {
                                 },
                             ]}
                         >
-                            <Input type='userEmail' placeholder="이메일을 입력해 주세요." />
+                            <Input type='email' placeholder="이메일을 입력해 주세요." />
                         </Form.Item>
                     </Col>
                 </Row>
