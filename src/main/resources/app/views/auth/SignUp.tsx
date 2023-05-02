@@ -7,7 +7,6 @@ import { Path } from '../../config/Route';
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const [form] = Form.useForm();
     const reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;  //6~20 영문 대소문자 중에 최소 1개의 숫자 혹은 특수 문자를 포함
 
     const [password, setPassword] = useState<string>('');
